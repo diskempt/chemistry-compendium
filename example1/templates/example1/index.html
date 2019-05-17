@@ -1,0 +1,2548 @@
+<html>
+
+<canvas id="gameCanvas" width="1800" height="800"></canvas>
+
+<script>
+var canvas,ctx,color0='white',color1 ='black',color2 ='red',color3='blue',carbonCol0 = 'black', carbonCol1 = 'black', carbonCol2 = 'black', carbonCol3 = 'black',carbonCol4='black',carbonCol5 = 'black',oxygenCol='black',carbonCol6 ='black', carbonCol7 = 'black',carbonCol8 = 'black',carbonCol9 = 'black',carbonCol9 = 'black',carbonCol10 = 'black',carbonCol11 = 'black',carbCatCol = 'white',
+oxAnCol = 'white',oxygenCol2 = 'black',solCol ='black', solX =736, solY =319,solECol='black',topElectronCol = 'black', leftElectronCol = 'black',topElectronY = 105, topElectronX = 245,leftElectronX = 235, leftElectronY = 119,rxnX1start = 463,rxnY1start = 189,rxnX1end = 663,rxnY1end = 189, rxnX2start = 463, rxnY2start = 209,rxnX2end = 663,rxnY2end = 209,
+littleArrowXstart = 663,littleArrowYstart = 189,littleArrowXend = 652,littleArrowYend = 180,littleArrowX2start = 463,littleArrowY2start = 209,littleArrowX2end = 473,littleArrowY2end = 219,lineCol12 = 'black',lineCol13 = 'black',lineCol14 = 'black',lineCol15 = 'black',lineCol16 = 'black',lineCol17 = 'black',lineCol18 = 'black',lineCol19 = 'black',lineCol20 = 'black',ctrlPoint2X = 878,ctrlPoint2Y = 443,ctrlPoint3X = 838,ctrlPoint3Y = 273,ctrlPoint4X = 932,ctrlPoint4Y = 154,carbonCol12 = 'black',carbonCol13 = 'black',carbonCol14 = 'black',carbonCol15 = 'black',carbonCol16 = 'black',carbonCol17 = 'black',oxAnCol2 = 'black',leftElectronCol2 = 'black',lineCol11 = 'black',hydrogenCol6 = 'black',hydrogenCol5 = 'black',hydrogenCol4 = 'black', hydrogen4X = 833,hydrogen4Y = 86,hydrogenCol3 = 'black', hydrogen3X = 552,hydrogen3Y = 146,hydrogenCol2 = 'black', hydrogen2X = 335,hydrogen2Y = 115,hydrogenCol1 = 'black',lineCol1= 'black', lineCol2= 'black', lineCol3= 'black', lineCol4= 'black', lineCol5= 'black', lineCol6= 'black', lineCol7= 'black',lineCol8='black',lineCol9='black',lineCol10='black',hitBoxWidth = 20, hitBoxHeight = 20,carbonX = 200, carbonY = 200,carbon2X = carbonX+56, carbon2Y = carbonY,carbon3X = carbonX,carbon3Y = carbonY-53,carbon4X = carbonX-56,carbon4Y = carbon2Y,carbon5X = carbon2X+56,carbon5Y = carbon2Y,carbon6X = carbon2X, carbon6Y = carbonY+56,hydrogen1X = carbonX, hydrogen1Y = carbonY + 56,oxygenX = carbon2X,oxygenY = carbon2Y-53,ctrlPointX = 0,ctrlPointY = 500,mouseX=0,mouseY=0;
+
+const CARBON_COUNT=1,OXYGEN_COUNT=4;
+
+
+function updateMousePos(evt){
+	var rect =canvas.getBoundingClientRect();
+	var root = document.documentElement;
+
+	mouseX = evt.clientX - rect.left - root.scrollLeft;
+	mouseY = evt.clientY - rect.top - root.scrollTop;
+
+}//end function updateMousePos()
+
+function updateAll(){
+		drawAll();
+		arrowGrab();
+
+}//end function updateAll()
+
+
+function calculateMousePos(evt) {
+		var rect = canvas.getBoundingClientRect();
+		var root = document.documentElement;
+		 mouseX = evt.clientX - rect.left - root.scrollLeft;
+		 mouseY = evt.clientY - rect.top - root.scrollTop;
+		return {
+				x:mouseX,
+				y:mouseY		
+		};
+}//end function calculateMousePos()
+
+window.onload = function() {
+		canvas = document.getElementById('gameCanvas');
+		ctx = canvas.getContext('2d');
+	
+
+		/*Call Functions and 
+		set Interval for computer to check what the user is doing*/
+		var framesPerSecond = 5;
+		
+		setInterval(updateAll,1000/framesPerSecond);
+
+		canvas.addEventListener('mousemove', updateMousePos);
+
+
+
+
+
+
+
+	// /* CARBON 0 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-20 && 
+				mouseY < carbonY-20 + hitBoxHeight && 
+				mouseX > carbonX-10 && 
+				mouseX < carbonX-10 + hitBoxWidth
+				){
+			
+				carbonCol0 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 0 Black COLOR CHANGE
+
+
+	// /* CARBON 0 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-20 && 
+				mouseY < carbonY-20 + hitBoxHeight && 
+				mouseX > carbonX+10 && 
+				mouseX < carbonX+10 + hitBoxWidth
+				){
+			
+				carbonCol0 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 0 Red COLOR CHANGE
+
+
+
+
+
+
+
+
+
+  // /* CARBON 1 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-20 && 
+				mouseY < carbon2Y-20 + hitBoxHeight && 
+				mouseX > carbon2X-10 && 
+				mouseX < carbon2X-10 + hitBoxWidth
+				){
+			
+				carbonCol1 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+
+
+	// /* CARBON 1 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-20 && 
+				mouseY < carbon2Y-20 + hitBoxHeight && 
+				mouseX > carbon2X+10 && 
+				mouseX < carbon2X+10 + hitBoxWidth
+				){
+			
+				carbonCol1= color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+
+	
+  // */ END CARBON 1 Red COLOR CHANGE
+
+
+
+
+
+
+
+
+
+
+	// /* CARBON 2 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon3Y-20 && 
+				mouseY < carbon3Y-20 + hitBoxHeight && 
+				mouseX > carbon3X-10 && 
+				mouseX < carbon3X-10 + hitBoxWidth
+				){
+			
+				carbonCol2 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 2 Black COLOR CHANGE
+
+  // /* CARBON 2 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon3Y-20 && 
+				mouseY < carbon3Y-20 + hitBoxHeight && 
+				mouseX > carbon3X+10 && 
+				mouseX < carbon3X+10 + hitBoxWidth
+				){
+			
+				carbonCol2 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 2 Red COLOR CHANGE
+
+
+
+
+
+
+
+	// /* CARBON 3 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon4Y-20 && 
+				mouseY < carbon4Y-20 + hitBoxHeight && 
+				mouseX > carbon4X-10 && 
+				mouseX < carbon4X-10 + hitBoxWidth
+				){
+			
+				carbonCol3 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 3 Black COLOR CHANGE
+
+  	// /* CARBON 3 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon4Y-20 && 
+				mouseY < carbon4Y-20 + hitBoxHeight && 
+				mouseX > carbon4X+10 && 
+				mouseX < carbon4X+10 + hitBoxWidth
+				){
+			
+				carbonCol3 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 3 Red COLOR CHANGE
+
+
+
+
+
+
+
+
+	// /* CARBON 4 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon5Y-20 && 
+				mouseY < carbon5Y-20 + hitBoxHeight && 
+				mouseX > carbon5X-10 && 
+				mouseX < carbon5X-10 + hitBoxWidth
+				){
+			
+				carbonCol4 = color1;
+				
+				}//end if
+
+			}//end function(evt)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 4 Black COLOR CHANGE
+
+  // /* CARBON 4 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon5Y-20 && 
+				mouseY < carbon5Y-20 + hitBoxHeight && 
+				mouseX > carbon5X+10 && 
+				mouseX < carbon5X+10 + hitBoxWidth
+				){
+
+				carbonCol4 = color2;
+				
+				}//end if
+
+			}//end function(evt)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 4 Red COLOR CHANGE
+
+
+
+
+
+
+	// /* CARBON 5 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon6Y-20 && 
+				mouseY < carbon6Y-20 + hitBoxHeight && 
+				mouseX > carbon6X-10 && 
+				mouseX < carbon6X-10 + hitBoxWidth
+				){
+			
+				carbonCol5 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 5 Black COLOR CHANGE
+
+  // /* CARBON 5 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon6Y-20 && 
+				mouseY < carbon6Y-20 + hitBoxHeight && 
+				mouseX > carbon6X+10 && 
+				mouseX < carbon6X+10 + hitBoxWidth
+				){
+			
+				carbonCol5 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 5 Red COLOR CHANGE
+
+
+
+
+
+
+// /* Hydrogen Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen1Y-20 && 
+				mouseY < hydrogen1Y-20 + hitBoxHeight && 
+				mouseX > hydrogen1X-10 && 
+				mouseX < hydrogen1X-10 + hitBoxWidth
+				){
+			
+				hydrogenCol1 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Hydrogen Black COLOR CHANGE
+
+  // /* Hydrogen COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen1Y-20 && 
+				mouseY < hydrogen1Y-20 + hitBoxHeight && 
+				mouseX > hydrogen1X+10 && 
+				mouseX < hydrogen1X+10 + hitBoxWidth
+				){
+			
+				hydrogenCol1 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Hydrogen Red COLOR CHANGE
+
+
+
+
+
+
+// /* Line Top to R Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-48 && 
+				mouseY < carbonY-48 + hitBoxHeight && 
+				mouseX > carbonX-8 && 
+				mouseX < carbonX-8 + hitBoxWidth
+				){
+			
+				lineCol2 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Top to R Black COLOR CHANGE
+
+  // /* Line Top to R Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-48 && 
+				mouseY < carbonY-48 + hitBoxHeight && 
+				mouseX > carbonX+8 && 
+				mouseX < carbonX+8 + hitBoxWidth
+				){
+			
+				lineCol2 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Top to R Red COLOR CHANGE
+
+
+
+
+
+
+  // /* Line Bottom to Hydrogen Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY+10 && 
+				mouseY < carbonY+10 + hitBoxHeight && 
+				mouseX > carbonX-8 && 
+				mouseX < carbonX-8 + hitBoxWidth
+				){
+			
+				lineCol4 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Bottom to Hydrogen Black COLOR CHANGE
+
+  // /* Line Bottom to Hydrogen Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY+10 && 
+				mouseY < carbonY+10 + hitBoxHeight && 
+				mouseX > carbonX+8 && 
+				mouseX < carbonX+8 + hitBoxWidth
+				){
+			
+				lineCol4 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line bottom to Hydrogen Red COLOR CHANGE
+
+
+
+
+
+
+  // /* Line Bottom to R Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y+10 && 
+				mouseY < carbon2Y+10 + hitBoxHeight && 
+				mouseX > carbon2X-8 && 
+				mouseX < carbon2X-8 + hitBoxWidth
+				){
+			
+				lineCol6 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Bottom to R Black COLOR CHANGE
+
+  // /* Line Bottom to R Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y+10 && 
+				mouseY < carbon2Y+10 + hitBoxHeight && 
+				mouseX > carbon2X+8 && 
+				mouseX < carbon2X+8 + hitBoxWidth
+				){
+			
+				lineCol6 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line bottom to R Red COLOR CHANGE
+
+
+
+
+
+
+
+  // /* Line Bottom to R Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-48 && 
+				mouseY < carbon2Y-48 + hitBoxHeight && 
+				mouseX > carbon2X-8 && 
+				mouseX < carbon2X-8 + hitBoxWidth
+				){
+			
+				lineCol9 = color1;
+				//lineCol10 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Bottom to R Black COLOR CHANGE
+
+  // /* Line Bottom to R Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-48 && 
+				mouseY < carbon2Y-48 + hitBoxHeight && 
+				mouseX > carbon2X+8 && 
+				mouseX < carbon2X+8 + hitBoxWidth
+				){
+			
+				lineCol9 = color2;
+				//lineCol10 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line bottom to R Red COLOR CHANGE
+
+
+
+
+
+
+ // /* Far Right Horizontal Line  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-30 && 
+				mouseY < carbon2Y-30 + hitBoxHeight && 
+				mouseX > carbon2X+30 && 
+				mouseX < carbon2X+30 + hitBoxWidth
+				){
+			
+				lineCol5 = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Far Right Horizontal Line Black COLOR CHANGE
+
+  // /* Far Righ Horizontal Line Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-10 && 
+				mouseY < carbon2Y-10 + hitBoxHeight && 
+				mouseX > carbon2X+30 && 
+				mouseX < carbon2X+30 + hitBoxWidth
+				){
+			
+				lineCol5 = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Far Right Horizontal Line Red COLOR CHANGE
+
+
+
+
+
+
+ // /* Middle Horizontal Line  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-30 && 
+				mouseY < carbonY-30 + hitBoxHeight && 
+				mouseX > carbonX+30 && 
+				mouseX < carbonX+30 + hitBoxWidth
+				){
+			
+				lineCol1 = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Middle Horizontal Line Black COLOR CHANGE
+
+  // /* Far Righ Horizontal Line Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-10 && 
+				mouseY < carbonY-10 + hitBoxHeight && 
+				mouseX > carbonX+30 && 
+				mouseX < carbonX+30 + hitBoxWidth
+				){
+			
+				lineCol1 = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Middle Horizontal Line Red COLOR CHANGE
+
+
+
+
+
+  // /* Left Horizontal Line  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-30 && 
+				mouseY < carbonY-30 + hitBoxHeight && 
+				mouseX > carbonX-30 && 
+				mouseX < carbonX-30 + hitBoxWidth
+				){
+			
+				lineCol3 = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END LeftHorizontal Line Black COLOR CHANGE
+
+  // /* Far Left Horizontal Line Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-10 && 
+				mouseY < carbonY-10 + hitBoxHeight && 
+				mouseX > carbonX-30 && 
+				mouseX < carbonX-30 + hitBoxWidth
+				){
+			
+				lineCol3 = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Left Horizontal Line Red COLOR CHANGE
+  
+  
+
+
+
+  
+   // /* Left Oxy electrons  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > leftElectronY && 
+				mouseY < leftElectronY + hitBoxHeight && 
+				mouseX > leftElectronX && 
+				mouseX < leftElectronX + hitBoxWidth
+				){
+			
+				leftElectronCol = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Left Oxy electrons Black COLOR CHANGE
+
+  // /* Far Left Oxy electrons Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > leftElectronY+20 && 
+				mouseY < leftElectronY+20 + hitBoxHeight && 
+				mouseX > leftElectronX && 
+				mouseX < leftElectronX + hitBoxWidth
+				){
+			
+				leftElectronCol = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Left Oxy electrons Red COLOR CHANGE
+  
+  
+
+  
+
+    // /* Top Oxy electrons  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > topElectronY && 
+				mouseY < topElectronY + hitBoxHeight && 
+				mouseX > topElectronX && 
+				mouseX < topElectronX + hitBoxWidth
+				){
+			
+				topElectronCol = color1;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Top Oxy electrons Black COLOR CHANGE
+
+  // /* Top Oxy electrons Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > topElectronY && 
+				mouseY < topElectronY + hitBoxHeight && 
+				mouseX > topElectronX+20 && 
+				mouseX < topElectronX+20 + hitBoxWidth
+				){
+			
+				topElectronCol = color2;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Top Oxy electrons Red COLOR CHANGE
+
+
+
+
+  	// /* Oxygen 1 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-20 && 
+				mouseY < oxygenY-20 + hitBoxHeight && 
+				mouseX > oxygenX-10 && 
+				mouseX < oxygenX-10 + hitBoxWidth
+				){
+			
+				oxygenCol = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Oxygen Black COLOR CHANGE
+
+  // /* Oxygen 1 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-20 && 
+				mouseY < oxygenY-20 + hitBoxHeight && 
+				mouseX > oxygenX+10 && 
+				mouseX < oxygenX+10 + hitBoxWidth
+				){
+			
+				oxygenCol = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Oxygen Red COLOR CHANGE
+
+
+
+
+	// /* TopMost Hydrogen Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen2Y-20 && 
+				mouseY < hydrogen2Y-20 + hitBoxHeight && 
+				mouseX > hydrogen2X-10 && 
+				mouseX < hydrogen2X-10 + hitBoxWidth
+				){
+			
+				hydrogenCol2 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMost Hydrogen Black COLOR CHANGE
+
+  // /* TopMost Hydrogen Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen2Y-20 && 
+				mouseY < hydrogen2Y-20 + hitBoxHeight && 
+				mouseX > hydrogen2X+10 && 
+				mouseX < hydrogen2X+10 + hitBoxWidth
+				){
+			
+				hydrogenCol2 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMostHydrogen Red COLOR CHANGE
+
+
+
+
+// /* TopMost Oxygen-Hydrogen Bond Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-40 && 
+				mouseY < oxygenY-40 + hitBoxHeight*2 && 
+				mouseX > oxygenX+30 && 
+				mouseX < oxygenX+30 + hitBoxWidth*2
+				){
+			
+				lineCol10 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMost Hydrogen Black COLOR CHANGE
+
+  // /* TopMost Oxygen-Hydrogen Bond Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-20 && 
+				mouseY < oxygenY-20 + hitBoxHeight*2 && 
+				mouseX > oxygenX+30 && 
+				mouseX < oxygenX+30 + hitBoxWidth*2
+				){
+			
+				lineCol10 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMost Oxygen-Hydrogen Bond Red COLOR CHANGE
+
+
+
+
+
+
+
+
+
+
+
+
+  // /* Over Reaction Arrows Hydrogen (+) Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen3Y-20 && 
+				mouseY < hydrogen3Y-20 + hitBoxHeight && 
+				mouseX > hydrogen3X-10 && 
+				mouseX < hydrogen3X-10 + hitBoxWidth
+				){
+			
+				hydrogenCol3 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Over Reaction Arrows Hydrogen (+) Black COLOR CHANGE
+
+  // /* Over Reaction Arrows Hydrogen (+) Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen3Y-20 && 
+				mouseY < hydrogen3Y-20 + hitBoxHeight && 
+				mouseX > hydrogen3X+10 && 
+				mouseX < hydrogen3X+10 + hitBoxWidth
+				){
+			
+				hydrogenCol3 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Over Reaction Arrows Hydrogen (+) Red COLOR CHANGE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}//end window.onload
+
+//top electrons curved arrow
+
+function arrowGrab(){
+//top electrons
+if(topElectronCol === color2 && hydrogenCol3 === color2
+	&& leftElectronCol === color1 && carbonCol0 === color1
+	&& carbonCol1 === color1 && carbonCol2 === color1 
+	&& carbonCol3 === color1 && carbonCol4 === color1
+	&& carbonCol5 === color1 && oxygenCol === color1
+	&& hydrogenCol1 === color1 && hydrogenCol2 === color1
+	&& lineCol1 === color1 && lineCol2 === color1
+	&& lineCol3 === color1 && lineCol4 === color1 
+	&& lineCol5 === color1 && lineCol6 === color1 
+	&& lineCol9 === color1 && lineCol10 === color1
+	){
+
+colorCurve(2,"#333",oxygenX,oxygenY-18,ctrlPointX,ctrlPointY,hydrogen3X,hydrogen3Y);
+colorLine(hydrogen3X,hydrogen3Y,529,149,'black');
+colorLine(hydrogen3X,hydrogen3Y,543,163,'black');
+drawAtoms2();
+}//end if statement TOP electrons
+
+
+
+
+//left electrons
+if(topElectronCol === color1 && hydrogenCol3 === color2
+	&& leftElectronCol === color2 && carbonCol0 === color1
+	&& carbonCol1 === color1 && carbonCol2 === color1 
+	&& carbonCol3 === color1 && carbonCol4 === color1
+	&& carbonCol5 === color1 && oxygenCol === color1
+	&& hydrogenCol1 === color1 && hydrogenCol2 === color1
+	&& lineCol1 === color1 && lineCol2 === color1
+	&& lineCol3 === color1 && lineCol4 === color1 
+	&& lineCol5 === color1 && lineCol6 === color1 
+	&& lineCol9 === color1 && lineCol10 === color1
+	){
+
+colorCurve(2,"#333",oxygenX-12,oxygenY-3,ctrlPointX,ctrlPointY,hydrogen3X,hydrogen3Y);
+colorLine(hydrogen3X,hydrogen3Y,529,149,'black');
+colorLine(hydrogen3X,hydrogen3Y,543,163,'black');
+drawAtoms2();
+}//end if statement LEFT electrons
+
+
+}//end function arrowGrab()
+
+
+
+function drawHitBoxes(){
+
+//Left Middle Carbon, Left & Right Hit Boxes
+//left hit box
+colorRect(carbonX-10,carbonY-20,hitBoxWidth,hitBoxHeight,color0);
+//right hit box
+colorRect(carbonX+10,carbonY-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Middle Right Carbon Left, Right Hit Boxes
+colorRect(carbon2X-10,carbon2Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon2X+10,carbon2Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+// Top Left R Group Left, Right Hit Boxes
+colorRect(carbon3X-10,carbon3Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon3X+10,carbon3Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Far Left R Group Left, Right Hit Box
+colorRect(carbon4X-10,carbon4Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon4X+10,carbon4Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Far Right R Group Left, Right Hit Box
+colorRect(carbon5X-10,carbon5Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon5X+10,carbon5Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Right R Group Left, Right Hit Box
+colorRect(carbon6X-10,carbon6Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon6X+10,carbon6Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Left Hydrogen Hit Box, Left Right 
+colorRect(hydrogen1X-10,hydrogen1Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(hydrogen1X+10,hydrogen1Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+// Top Right Oxygen Hit Box (Left, Right)
+colorRect(oxygenX-10,oxygenY-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(oxygenX+10,oxygenY-20,hitBoxWidth,hitBoxHeight,color0);
+
+// lines/bonds
+//Top Left Vertical Line from C to R, Left & Right Hit Boxes
+colorRect(carbonX-8,carbonY-48,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbonX+8,carbonY-48,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Left Vertical line to H, Left & Right Hit Boxes
+colorRect(carbonX-8,carbonY+10,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbonX+8,carbonY+10,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Right Vertical from C to H bond/line, Left & Right Hit Boxes
+colorRect(carbon2X-8,carbon2Y+10,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon2X+8,carbon2Y+10,hitBoxWidth,hitBoxHeight,color0);
+
+//Top Right Vertical C to O bond, Left & Right Hit Boxes
+colorRect(carbon2X-8,carbon2Y-48,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon2X+8,carbon2Y-48,hitBoxWidth,hitBoxHeight,color0);
+
+//Far Right Horizontal bond from C to R, Top & Bottom Hit Boxes
+colorRect(carbon2X+30,carbon2Y-30,hitBoxHeight,hitBoxWidth,color0);
+colorRect(carbon2X+30,carbon2Y-10,hitBoxHeight,hitBoxWidth,color0);
+
+//Middle Horizontal Bond from C to C, Top & Bottom Hit Boxes
+colorRect(carbonX+30,carbonY-30,hitBoxHeight,hitBoxWidth,color0);
+colorRect(carbonX+30,carbonY-10,hitBoxHeight,hitBoxWidth,color0);
+
+//Far Left Horizontal Bond from C to R, Top & Bottom Hit Boxes
+colorRect(carbonX-30,carbonY-30,hitBoxHeight,hitBoxWidth,color0);
+colorRect(carbonX-30,carbonY-10,hitBoxHeight,hitBoxWidth,color0);
+
+//Oxygen Top electrons, Left & Right Hit Boxes
+colorRect(topElectronX,topElectronY,hitBoxHeight,hitBoxWidth,color0);
+colorRect(topElectronX+20,topElectronY,hitBoxHeight,hitBoxWidth,color0);
+
+//Oxygen Left electrons, Top & Bottom Hit Boxes
+colorRect(leftElectronX,leftElectronY,hitBoxHeight,hitBoxWidth,color0);
+colorRect(leftElectronX,leftElectronY+20,hitBoxHeight,hitBoxWidth,color0);
+
+//TopMost Hydrogen near Oxygen, Left & Right Hit Boxes
+colorRect(hydrogen2X-10,hydrogen2Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(hydrogen2X+10,hydrogen2Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//TopMost Oxygen-Hydrogen 45 degree Bond, Top & Bottom Hit Boxes (Vertical)
+colorRect(oxygenX+30,oxygenY-40,hitBoxHeight*2,hitBoxWidth,color0);
+colorRect(oxygenX+30,oxygenY-20,hitBoxHeight*2,hitBoxWidth,color0);
+
+//Over Reaction Arrows Hydrogen (+)
+colorRect(hydrogen3X-10,hydrogen3Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(hydrogen3X+10,hydrogen3Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+
+
+}//end function drawHitBoxes()
+
+function drawAtoms(){
+
+		// Middle Left Carbon
+		colorMol("25px Arial","C",carbonX,carbonY,carbonCol0);
+		// Right Middle Carbon
+		colorMol("25px Arial","C",carbon2X,carbon2Y,carbonCol1);
+		// Top Left R Group
+		colorMol("25px Arial","R",carbon3X,carbon3Y,carbonCol2);
+		// Far Left R Group
+		colorMol("25px Arial","R",carbon4X,carbon4Y,carbonCol3);
+		// Far Right R Group
+		colorMol("25px Arial","R",carbon5X,carbon5Y,carbonCol4);
+		// Right Bottom R Group
+		colorMol("25px Arial","R",carbon6X,carbon6Y,carbonCol5);
+		//Bottom Left Hydrogen
+		colorMol("25px Arial","H",hydrogen1X,hydrogen1Y,hydrogenCol1);
+		//TopMost Hydrogen
+		colorMol("25px Arial","H",hydrogen2X,hydrogen2Y,hydrogenCol2);
+		//CarboCation on Middle Left Carbon
+		colorMol('25px Arial','+',carbonX+15,carbonY-15,carbCatCol);
+		//Top Oxygen
+		colorMol("25px Arial","O",oxygenX,oxygenY,oxygenCol);
+		//OxyAnion on top Oxygen
+		colorMol('25px Arial','-',oxygenX+15,oxygenY-15,oxAnCol);
+		//Top Oxygen Horizontal electrons
+		colorMol('25px Arial','••',oxygenX,oxygenY-18,topElectronCol);
+		//Left Vertical Oxygen electrons
+		colorMol('25px Arial','•',oxygenX-12,oxygenY+5,leftElectronCol);
+		colorMol('25px Arial','•',oxygenX-12,oxygenY-3,leftElectronCol);
+		// Over Reaction Arrows Hydrogen (+)
+		colorMol('25px Arial', 'H',hydrogen3X,hydrogen3Y,hydrogenCol3);
+		// Over Reaction Arrows Hydrogen Positive Charge (+)
+		colorMol('25px Arial', '+',hydrogen3X+20,hydrogen3Y-20,hydrogenCol3);
+		// b/a indicating under basic or acidic conditions
+		colorMol('25px Arial','b / a',536,246,'black');
+
+}//end function drawAtoms()
+
+function drawAtoms2(){
+		//Hit Boxes
+
+		//Left Middle Carbon, Left & Right Hit Boxes
+//left hit box
+colorRect(carbonX+590,carbonY-20,hitBoxWidth,hitBoxHeight,color0);
+//right hit box
+colorRect(carbonX+610,carbonY-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Middle Right Carbon Left, Right Hit Boxes
+colorRect(carbon2X+590,carbon2Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon2X+610,carbon2Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+// Top Left R Group Left, Right Hit Boxes
+colorRect(carbon3X+590,carbon3Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon3X+610,carbon3Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Far Left R Group Left, Right Hit Box
+colorRect(carbon4X+590,carbon4Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon4X+610,carbon4Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Far Right R Group Left, Right Hit Box
+colorRect(carbon5X+590,carbon5Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon5X+610,carbon5Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Right R Group Left, Right Hit Box
+colorRect(carbon6X+590,carbon6Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon6X+610,carbon6Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Left Hydrogen Hit Box, Left Right 
+colorRect(hydrogen1X+590,hydrogen1Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(hydrogen1X+610,hydrogen1Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+// Top Right Oxygen Hit Box (Left, Right)
+colorRect(oxygenX+590,oxygenY-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(oxygenX+600,oxygenY-20,hitBoxWidth,hitBoxHeight,color0);
+
+// lines/bonds
+//Top Left Vertical Line from C to R, Left & Right Hit Boxes
+colorRect(carbonX+592,carbonY-48,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbonX+608,carbonY-48,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Left Vertical line to H, Left & Right Hit Boxes
+colorRect(carbonX+592,carbonY+10,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbonX+608,carbonY+10,hitBoxWidth,hitBoxHeight,color0);
+
+//Bottom Right Vertical from C to H bond/line, Left & Right Hit Boxes
+colorRect(carbon2X+592,carbon2Y+10,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon2X+608,carbon2Y+10,hitBoxWidth,hitBoxHeight,color0);
+
+//Top Right Vertical C to O bond, Left & Right Hit Boxes
+colorRect(carbon2X+592,carbon2Y-48,hitBoxWidth,hitBoxHeight,color0);
+colorRect(carbon2X+608,carbon2Y-48,hitBoxWidth,hitBoxHeight,color0);
+
+//Far Right Horizontal bond from C to R, Top & Bottom Hit Boxes
+colorRect(carbon2X+630,carbon2Y-30,hitBoxHeight,hitBoxWidth,color0);
+colorRect(carbon2X+630,carbon2Y-10,hitBoxHeight,hitBoxWidth,color0);
+
+//Middle Horizontal Bond from C to C, Top & Bottom Hit Boxes
+colorRect(carbonX+630,carbonY-30,hitBoxHeight,hitBoxWidth,color0);
+colorRect(carbonX+630,carbonY-10,hitBoxHeight,hitBoxWidth,color0);
+
+//Far Left Horizontal Bond from C to R, Top & Bottom Hit Boxes
+colorRect(carbonX+570,carbonY-30,hitBoxHeight,hitBoxWidth,color0);
+colorRect(carbonX+570,carbonY-10,hitBoxHeight,hitBoxWidth,color0);
+
+//Oxygen Top electrons, Left & Right Hit Boxes
+colorRect(topElectronX+600,topElectronY,hitBoxHeight,hitBoxWidth,color0);
+colorRect(topElectronX+620,topElectronY,hitBoxHeight,hitBoxWidth,color0);
+
+//Oxygen Left electrons, Top & Bottom Hit Boxes
+colorRect(leftElectronX+600,leftElectronY,hitBoxHeight,hitBoxWidth,color0);
+colorRect(leftElectronX+600,leftElectronY+20,hitBoxHeight,hitBoxWidth,color0);
+
+//TopMost Hydrogen near Oxygen, Left & Right Hit Boxes
+colorRect(hydrogen2X+590,hydrogen2Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(hydrogen2X+610,hydrogen2Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+//TopMost Oxygen-Hydrogen 45 degree Bond, Top & Bottom Hit Boxes (Vertical)
+colorRect(oxygenX+630,oxygenY-40,hitBoxHeight*2,hitBoxWidth,color0);
+colorRect(oxygenX+630,oxygenY-20,hitBoxHeight*2,hitBoxWidth,color0);
+
+// Sol electrons Vertical Hit Boxes, Top & Bottom
+colorRect(solX+37,solY-27,hitBoxHeight,hitBoxWidth,color0);
+colorRect(solX+37,solY-7,hitBoxHeight,hitBoxWidth,color0);
+
+// New Hydrogen Hit Box, Left & Right
+colorRect(hydrogen4X-10,hydrogen4Y-20,hitBoxWidth,hitBoxHeight,color0);
+colorRect(hydrogen4X+10,hydrogen4Y-20,hitBoxWidth,hitBoxHeight,color0);
+
+
+
+		//Atoms
+		// Middle Left Carbon
+		colorMol("25px Arial","C",carbonX+600,carbonY,carbonCol6);
+		// Right Middle Carbon
+		colorMol("25px Arial","C",carbon2X+600,carbon2Y,carbonCol7);
+		// Top Left R Group
+		colorMol("25px Arial","R",carbon3X+600,carbon3Y,carbonCol8);
+		// Far Left R Group
+		colorMol("25px Arial","R",carbon4X+600,carbon4Y,carbonCol9);
+		// Far Right R Group
+		colorMol("25px Arial","R",carbon5X+600,carbon5Y,carbonCol10);
+		// Right Bottom R Group
+		colorMol("25px Arial","R",carbon6X+600,carbon6Y,carbonCol11);
+		//Bottom Left Hydrogen
+		colorMol("25px Arial","H",hydrogen1X+600,hydrogen1Y,hydrogenCol4);
+		//TopMost Hydrogen
+		colorMol("25px Arial","H",hydrogen2X+600,hydrogen2Y,hydrogenCol5);
+		//CarboCation on Middle Left Carbon
+		colorMol('25px Arial','+',carbonX+615,carbonY-15,carbCatCol);
+		//Top Oxygen
+		colorMol("25px Arial","O",oxygenX+600,oxygenY,oxygenCol2);
+		//OxyAnion on top Oxygen
+		colorMol('25px Arial','-',oxygenX+615,oxygenY-15,oxAnCol);
+		//Left Vertical Oxygen electrons
+		colorMol('25px Arial','•',oxygenX+588,oxygenY+5,leftElectronCol2);
+		colorMol('25px Arial','•',oxygenX+588,oxygenY-3,leftElectronCol2);
+		//new Hydrogen
+		colorMol('25px Arial','H',hydrogen4X,hydrogen4Y,hydrogenCol6);
+		//OxyCation + Symbol
+		colorMol('25px Arial','+',oxygenX+615,oxygenY-15,oxygenCol2);
+		//Sol with electrons
+		colorMol('25px Arial','Sol',solX,solY,solCol);
+		colorMol('25px Arial','•',solX+37,solY-4,solECol);
+		colorMol('25px Arial','•',solX+37,solY+8,solECol);
+
+		//2nd rxn line
+		colorLine(rxnX1start+600,rxnY1start,rxnX1end+600,rxnY1end,'black');
+		//top little arrow
+		colorLine(littleArrowXstart+600,littleArrowYstart,littleArrowXend+600,littleArrowYend,'black');
+		//E2 under rxn line
+		colorMol('25px Arial','E2',1146,226,'black');
+
+		//Bonds
+		// Middle Carbon Carbon Horizontal Bond
+		colorLine(carbonX+620,carbonY-10,carbon2X+598,carbon2Y-10,lineCol12);
+		// Top Left Carbon - R Group Vertical Bond
+		colorLine(carbonX+608,carbonY-22,carbon3X+608,carbon3Y+2,lineCol13);
+		// Far Left Carbon - R Group Horizontal Bond
+		colorLine(carbonX+595,carbonY-10,carbon4X+620,carbon4Y-10,lineCol14);
+		// Bottom Left Carbon - Hydrogen Vertical Bond
+		colorLine(carbonX+608,carbonY+5,hydrogen1X+608,hydrogen1Y-20,lineCol15);
+		// Far Right Carbon - R Group Horizontal Bond
+		colorLine(carbon2X+620,carbon2Y-10,carbon5X+598,carbon5Y-10,lineCol16);
+		// Far Right Carbon - R group Vertical Bond
+		colorLine(carbon2X+608,carbon2Y+5,carbon6X+608,carbon6Y-20,lineCol17);
+		// Top Right Carbon - Oxygen Vertical Bond
+		colorLine(carbon2X+609,carbon2Y-22,oxygenX+609,oxygenY+2,lineCol18);
+		// TopMost Oxygen - Hydrogen 45 degree Bond
+		colorLine(oxygenX+623,oxygenY-10,hydrogen2X+592,hydrogen2Y-5,lineCol19);
+		//new bond from Oxygen to new hydrogen
+		colorLine(oxygenX+605,oxygenY-20,hydrogen4X+10,hydrogen4Y+5,lineCol20);
+
+
+
+	// Event Listeners for Mouse Clicks
+
+
+
+// /* CARBON 0 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-20 && 
+				mouseY < carbonY-20 + hitBoxHeight && 
+				mouseX > carbonX+590 && 
+				mouseX < carbonX+590 + hitBoxWidth
+				){
+			
+				carbonCol6 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 0 Black COLOR CHANGE
+
+
+	// /* CARBON 0 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-20 && 
+				mouseY < carbonY-20 + hitBoxHeight && 
+				mouseX > carbonX+610 && 
+				mouseX < carbonX+610 + hitBoxWidth
+				){
+			
+				carbonCol6 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 0 Red COLOR CHANGE
+
+
+
+
+
+
+
+
+
+  // /* CARBON 1 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-20 && 
+				mouseY < carbon2Y-20 + hitBoxHeight && 
+				mouseX > carbon2X+590 && 
+				mouseX < carbon2X+590 + hitBoxWidth
+				){
+			
+				carbonCol7 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+
+
+	// /* CARBON 1 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-20 && 
+				mouseY < carbon2Y-20 + hitBoxHeight && 
+				mouseX > carbon2X+610 && 
+				mouseX < carbon2X+610 + hitBoxWidth
+				){
+			
+				carbonCol7= color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+
+	
+  // */ END CARBON 1 Red COLOR CHANGE
+
+
+
+
+
+
+
+
+
+
+	// /* CARBON 2 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon3Y-20 && 
+				mouseY < carbon3Y-20 + hitBoxHeight && 
+				mouseX > carbon3X+590 && 
+				mouseX < carbon3X+590 + hitBoxWidth
+				){
+			
+				carbonCol8 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 2 Black COLOR CHANGE
+
+  // /* CARBON 2 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon3Y-20 && 
+				mouseY < carbon3Y-20 + hitBoxHeight && 
+				mouseX > carbon3X+610 && 
+				mouseX < carbon3X+610 + hitBoxWidth
+				){
+			
+				carbonCol8 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 2 Red COLOR CHANGE
+
+
+
+
+
+
+
+	// /* CARBON 3 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon4Y-20 && 
+				mouseY < carbon4Y-20 + hitBoxHeight && 
+				mouseX > carbon4X+590 && 
+				mouseX < carbon4X+590 + hitBoxWidth
+				){
+			
+				carbonCol9 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 3 Black COLOR CHANGE
+
+  	// /* CARBON 3 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon4Y-20 && 
+				mouseY < carbon4Y-20 + hitBoxHeight && 
+				mouseX > carbon4X+610 && 
+				mouseX < carbon4X+610 + hitBoxWidth
+				){
+			
+				carbonCol9 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 3 Red COLOR CHANGE
+
+
+
+
+
+
+
+
+	// /* CARBON 4 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon5Y-20 && 
+				mouseY < carbon5Y-20 + hitBoxHeight && 
+				mouseX > carbon5X+590 && 
+				mouseX < carbon5X+590 + hitBoxWidth
+				){
+			
+				carbonCol10 = color1;
+				
+				}//end if
+
+			}//end function(evt)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 4 Black COLOR CHANGE
+
+  // /* CARBON 4 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon5Y-20 && 
+				mouseY < carbon5Y-20 + hitBoxHeight && 
+				mouseX > carbon5X+610 && 
+				mouseX < carbon5X+610 + hitBoxWidth
+				){
+
+				carbonCol10 = color2;
+				
+				}//end if
+
+			}//end function(evt)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 4 Red COLOR CHANGE
+
+
+
+
+
+
+	// /* CARBON 5 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon6Y-20 && 
+				mouseY < carbon6Y-20 + hitBoxHeight && 
+				mouseX > carbon6X+590 && 
+				mouseX < carbon6X+590 + hitBoxWidth
+				){
+			
+				carbonCol11 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 5 Black COLOR CHANGE
+
+  // /* CARBON 5 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon6Y-20 && 
+				mouseY < carbon6Y-20 + hitBoxHeight && 
+				mouseX > carbon6X+610 && 
+				mouseX < carbon6X+610 + hitBoxWidth
+				){
+			
+				carbonCol11 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END CARBON 5 Red COLOR CHANGE
+
+
+
+
+
+
+// /* Hydrogen Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen1Y-20 && 
+				mouseY < hydrogen1Y-20 + hitBoxHeight && 
+				mouseX > hydrogen1X+590 && 
+				mouseX < hydrogen1X+590 + hitBoxWidth
+				){
+			
+				hydrogenCol4 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Hydrogen Black COLOR CHANGE
+
+  // /* Hydrogen COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen1Y-20 && 
+				mouseY < hydrogen1Y-20 + hitBoxHeight && 
+				mouseX > hydrogen1X+610 && 
+				mouseX < hydrogen1X+610 + hitBoxWidth
+				){
+			
+				hydrogenCol4 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Hydrogen Red COLOR CHANGE
+
+
+
+
+
+
+// /* Line Top to R Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-48 && 
+				mouseY < carbonY-48 + hitBoxHeight && 
+				mouseX > carbonX+592 && 
+				mouseX < carbonX+592 + hitBoxWidth
+				){
+			
+				lineCol13 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Top to R Black COLOR CHANGE
+
+  // /* Line Top to R Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-48 && 
+				mouseY < carbonY-48 + hitBoxHeight && 
+				mouseX > carbonX+608 && 
+				mouseX < carbonX+608 + hitBoxWidth
+				){
+			
+				lineCol13 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Top to R Red COLOR CHANGE
+
+
+
+
+
+
+  // /* Line Bottom to Hydrogen Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY+10 && 
+				mouseY < carbonY+10 + hitBoxHeight && 
+				mouseX > carbonX+592 && 
+				mouseX < carbonX+592 + hitBoxWidth
+				){
+			
+				lineCol15 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Bottom to Hydrogen Black COLOR CHANGE
+
+  // /* Line Bottom to Hydrogen Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY+10 && 
+				mouseY < carbonY+10 + hitBoxHeight && 
+				mouseX > carbonX+608 && 
+				mouseX < carbonX+608 + hitBoxWidth
+				){
+			
+				lineCol15 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line bottom to Hydrogen Red COLOR CHANGE
+
+
+
+
+
+
+  // /* Line Bottom to R Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y+10 && 
+				mouseY < carbon2Y+10 + hitBoxHeight && 
+				mouseX > carbon2X+592 && 
+				mouseX < carbon2X+592 + hitBoxWidth
+				){
+			
+				lineCol17 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Bottom to R Black COLOR CHANGE
+
+  // /* Line Bottom to R Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y+10 && 
+				mouseY < carbon2Y+10 + hitBoxHeight && 
+				mouseX > carbon2X+608 && 
+				mouseX < carbon2X+608 + hitBoxWidth
+				){
+			
+				lineCol17 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line bottom to R Red COLOR CHANGE
+
+
+
+
+
+
+
+  // /* Line Bottom to R Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-48 && 
+				mouseY < carbon2Y-48 + hitBoxHeight && 
+				mouseX > carbon2X+592 && 
+				mouseX < carbon2X+592 + hitBoxWidth
+				){
+			
+				lineCol18 = color1;
+				//lineCol10 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line Bottom to R Black COLOR CHANGE
+
+  // /* Line Bottom to R Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-48 && 
+				mouseY < carbon2Y-48 + hitBoxHeight && 
+				mouseX > carbon2X+608 && 
+				mouseX < carbon2X+608 + hitBoxWidth
+				){
+			
+				lineCol18 = color2;
+				//lineCol10 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Line bottom to R Red COLOR CHANGE
+
+
+
+
+
+
+ // /* Far Right Horizontal Line  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-30 && 
+				mouseY < carbon2Y-30 + hitBoxHeight && 
+				mouseX > carbon2X+630 && 
+				mouseX < carbon2X+630 + hitBoxWidth
+				){
+			
+				lineCol16 = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Far Right Horizontal Line Black COLOR CHANGE
+
+  // /* Far Righ Horizontal Line Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbon2Y-10 && 
+				mouseY < carbon2Y-10 + hitBoxHeight && 
+				mouseX > carbon2X+630 && 
+				mouseX < carbon2X+630 + hitBoxWidth
+				){
+			
+				lineCol16 = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Far Right Horizontal Line Red COLOR CHANGE
+
+
+
+
+
+
+ // /* Middle Horizontal Line  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-30 && 
+				mouseY < carbonY-30 + hitBoxHeight && 
+				mouseX > carbonX+630 && 
+				mouseX < carbonX+630 + hitBoxWidth
+				){
+			
+				lineCol12 = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Middle Horizontal Line Black COLOR CHANGE
+
+  // /* Far Right Horizontal Line Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-10 && 
+				mouseY < carbonY-10 + hitBoxHeight && 
+				mouseX > carbonX+630 && 
+				mouseX < carbonX+630 + hitBoxWidth
+				){
+			
+				lineCol12 = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Middle Horizontal Line Red COLOR CHANGE
+
+
+
+
+
+  // /* Left Horizontal Line  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-30 && 
+				mouseY < carbonY-30 + hitBoxHeight && 
+				mouseX > carbonX+570 && 
+				mouseX < carbonX+570 + hitBoxWidth
+				){
+			
+				lineCol14 = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END LeftHorizontal Line Black COLOR CHANGE
+
+  // /* Far Left Horizontal Line Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > carbonY-10 && 
+				mouseY < carbonY-10 + hitBoxHeight && 
+				mouseX > carbonX+570 && 
+				mouseX < carbonX+570 + hitBoxWidth
+				){
+			
+				lineCol14 = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Left Horizontal Line Red COLOR CHANGE
+  
+  
+
+
+
+  
+   // /* Left Oxy electrons  Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > leftElectronY && 
+				mouseY < leftElectronY + hitBoxHeight && 
+				mouseX > leftElectronX+600 && 
+				mouseX < leftElectronX+600 + hitBoxWidth
+				){
+			
+				leftElectronCol2 = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Left Oxy electrons Black COLOR CHANGE
+
+  // /* Far Left Oxy electrons Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > leftElectronY+20 && 
+				mouseY < leftElectronY+20 + hitBoxHeight && 
+				mouseX > leftElectronX+600 && 
+				mouseX < leftElectronX+600 + hitBoxWidth
+				){
+			
+				leftElectronCol2 = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Left Oxy electrons Red COLOR CHANGE
+  
+  
+
+  
+
+   
+
+
+
+
+  	// /* Oxygen 1 Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-20 && 
+				mouseY < oxygenY-20 + hitBoxHeight && 
+				mouseX > oxygenX+590 && 
+				mouseX < oxygenX+590 + hitBoxWidth
+				){
+			
+				oxygenCol2 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Oxygen Black COLOR CHANGE
+
+  // /* Oxygen 1 Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-20 && 
+				mouseY < oxygenY-20 + hitBoxHeight && 
+				mouseX > oxygenX+610 && 
+				mouseX < oxygenX+610 + hitBoxWidth
+				){
+			
+				oxygenCol2 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Oxygen Red COLOR CHANGE
+
+
+
+
+	// /* TopMost Hydrogen Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen2Y-20 && 
+				mouseY < hydrogen2Y-20 + hitBoxHeight && 
+				mouseX > hydrogen2X+590 && 
+				mouseX < hydrogen2X+590 + hitBoxWidth
+				){
+			
+				hydrogenCol5 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMost Hydrogen Black COLOR CHANGE
+
+  // /* TopMost Hydrogen Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen2Y-20 && 
+				mouseY < hydrogen2Y-20 + hitBoxHeight && 
+				mouseX > hydrogen2X+610 && 
+				mouseX < hydrogen2X+610 + hitBoxWidth
+				){
+			
+				hydrogenCol5 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMostHydrogen Red COLOR CHANGE
+
+
+
+
+// /* TopMost Oxygen-Hydrogen Bond Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-40 && 
+				mouseY < oxygenY-40 + hitBoxHeight*2 && 
+				mouseX > oxygenX+630 && 
+				mouseX < oxygenX+630 + hitBoxWidth*2
+				){
+			
+				lineCol19 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMost Hydrogen Black COLOR CHANGE
+
+  // /* TopMost Oxygen-Hydrogen Bond Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > oxygenY-20 && 
+				mouseY < oxygenY-20 + hitBoxHeight*2 && 
+				mouseX > oxygenX+630 && 
+				mouseX < oxygenX+630 + hitBoxWidth*2
+				){
+			
+				lineCol19 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END TopMost Oxygen-Hydrogen Bond Red COLOR CHANGE
+
+
+
+
+  // /* New Hydrogen Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen4Y-20 && 
+				mouseY < hydrogen4Y-20 + hitBoxHeight && 
+				mouseX > hydrogen4X-10 && 
+				mouseX < hydrogen4X-10 + hitBoxWidth
+				){
+			
+				hydrogenCol6 = color1;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END New Hydrogen Black COLOR CHANGE
+
+  // /* New Hydrogen Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > hydrogen4Y-20 && 
+				mouseY < hydrogen4Y-20 + hitBoxHeight && 
+				mouseX > hydrogen4X+10 && 
+				mouseX < hydrogen4X+10 + hitBoxWidth
+				){
+			
+				hydrogenCol6 = color2;
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END New Hydrogen Red COLOR CHANGE
+
+
+
+
+
+
+  // /* Sol electrons  Red COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > solY-27 && 
+				mouseY < solY-27 + hitBoxHeight && 
+				mouseX > solX+37 && 
+				mouseX < solX+37 + hitBoxWidth
+				){
+			
+				solECol = color2;
+			
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Sol electrons Red COLOR CHANGE
+
+  // /* Far Sol electrons Black COLOR CHANGE
+
+		canvas.addEventListener('click', 
+			function(evt){
+			
+			if( mouseY > solY-7 && 
+				mouseY < solY-7 + hitBoxHeight && 
+				mouseX > solX+37 && 
+				mouseX < solX+37 + hitBoxWidth
+				){
+			
+				solECol = color1;
+				
+				
+				}//end if
+
+			}//end function(element)
+		
+		,false);//end canvas.addEventListener
+	
+  // */ END Sol electrons Black COLOR CHANGE
+
+
+
+
+  // if statement to proceed to the next part of the mechanism
+
+
+if( hydrogenCol6 === color1
+	&& leftElectronCol2 === color1 && carbonCol6 === color1
+	&& carbonCol7 === color2 && carbonCol8 === color1 
+	&& carbonCol9 === color1 && carbonCol10 === color1
+	&& carbonCol11 === color1 && oxygenCol2 === color2
+	&& hydrogenCol4 === color2 && hydrogenCol5 === color1
+	&& lineCol12 === color1 && lineCol13 === color1
+	&& lineCol14 === color1 && lineCol15 === color2 
+	&& lineCol16 === color1 && lineCol17 === color1 
+	&& lineCol18 === color2 && lineCol19 === color1
+	&& lineCol20 === color1
+	){
+
+
+// curved line and arrow head from sol electrons to bottom left hydrogen
+colorCurve(2,"#333",solX+40,solY-3,ctrlPoint2X,ctrlPoint2Y,hydrogen1X+600,hydrogen1Y);
+colorLine(hydrogen1X+600,hydrogen1Y,821,275,'black');
+colorLine(hydrogen1X+600,hydrogen1Y,792,275,'black');
+
+
+// curved line and arrow head from bottom left vertical bond to far right carbon
+colorCurve(2,"#333",809,216,ctrlPoint3X,ctrlPoint3Y,carbon2X+600,carbon2Y);
+colorLine(carbon2X+600,carbon2Y,858,220,'black');
+colorLine(carbon2X+600,carbon2Y,842,212,'black');
+
+//curved line and arrow head from top right vertical bond to oxygen
+// curved line and arrow head from bottom left vertical bond to far right carbon
+colorCurve(2,"#333",877,168,ctrlPoint4X,ctrlPoint4Y,866,129);
+colorLine(866,129,878,147,'black');
+colorLine(866,129,882,123,'black');
+
+
+
+
+
+
+
+//Load the final part of the mechanism
+drawAtoms3();
+}//end if statement
+
+
+}//end function drawAtoms2()
+
+
+
+
+
+
+function drawAtoms3(){
+
+//Atoms
+		// Middle Left Carbon
+		colorMol("25px Arial","C",carbonX+1200,carbonY,carbonCol12);
+		// Right Middle Carbon
+		colorMol("25px Arial","C",carbon2X+1200,carbon2Y,carbonCol13);
+		// Top Left R Group
+		colorMol("25px Arial","R",carbon3X+1200,carbon3Y,carbonCol8);
+		// Far Left R Group
+		colorMol("25px Arial","R",carbon4X+1200,carbon4Y,carbonCol9);
+		// Far Right R Group
+		colorMol("25px Arial","R",carbon5X+1200,carbon5Y,carbonCol10);
+		// Right Bottom R Group
+		colorMol("25px Arial","R",carbon6X+1200,carbon6Y,carbonCol11);
+		//Sol with Hydrogen
+		colorMol('25px Arial','Sol',solX+600,solY,solCol);
+		//Hydrogen on Sol
+		colorMol('25px Arial','H',1408,319,'black');
+		//Water Oxygen
+		colorMol('25px Arial','O',1545,100,'black');
+		//Left Water Hydrogen
+		colorMol('25px Arial','H',1500,100,'black');
+		//Right Water Hydrogen
+		colorMol('25px Arial','H',1595,100,'black');
+		//Top Oxygen Horizontal electrons
+		colorMol('25px Arial','••',1546,83,'black');
+		//Bottom Oxygen Horizontal electrons
+		colorMol('25px Arial','••',1546,117,'black');
+		//Sol positive Charge
+		colorMol('25px Arial','+',solX+613,solY+22,'black');
+
+		//Bonds
+		// Middle Carbon Carbon Horizontal Bond
+		colorLine(carbonX+1220,carbonY-10,carbon2X+1198,carbon2Y-10,lineCol12);
+		colorLine(carbonX+1220,carbonY-5,carbon2X+1198,carbon2Y-5,lineCol12);
+		// Top Left Carbon - R Group Vertical Bond
+		colorLine(carbonX+1208,carbonY-22,carbon3X+1208,carbon3Y+2,lineCol13);
+		// Far Left Carbon - R Group Horizontal Bond
+		colorLine(carbonX+1195,carbonY-10,carbon4X+1220,carbon4Y-10,lineCol14);
+		// Far Right Carbon - R Group Horizontal Bond
+		colorLine(carbon2X+1220,carbon2Y-10,carbon5X+1198,carbon5Y-10,lineCol16);
+		// Far Right Carbon - R group Vertical Bond
+		colorLine(carbon2X+1208,carbon2Y+5,carbon6X+1208,carbon6Y-20,lineCol17);
+		//Sol to hydrogen bond
+		colorLine(1380,309,1403,309,'black');
+		//Left Oxygen-Hydrogen Bond
+		colorLine(1523,94,1539,94);
+		//Right Oxygen-Hydrogen Bond
+		colorLine(1569,94,1585,94,'black');
+
+
+}//end function drawAtoms3()
+
+
+
+
+
+function drawAll(){
+
+	//All this happens every 1 frame, so 5 times a second
+
+		//Draws new Canvas every frame, clears previous things on canvas and starts fresh
+		colorRect(0,0,canvas.width,canvas.height,color0);
+
+		drawHitBoxes();
+
+		drawAtoms();
+
+		drawBonds();
+
+	 	//colorText(mouseX+","+mouseY,mouseX,mouseY,color1);
+
+}//End function drawAll()
+
+function drawBonds(){
+		// Middle Carbon Carbon Horizontal Bond
+		colorLine(carbonX+20,carbonY-10,carbon2X-2,carbon2Y-10,lineCol1);
+		// Top Left Carbon - R Group Vertical Bond
+		colorLine(carbonX+8,carbonY-22,carbon3X+8,carbon3Y+2,lineCol2);
+		// Far Left Carbon - R Group Horizontal Bond
+		colorLine(carbonX-5,carbonY-10,carbon4X+20,carbon4Y-10,lineCol3);
+		// Bottom Left Carbon - Hydrogen Vertical Bond
+		colorLine(carbonX+8,carbonY+5,hydrogen1X+8,hydrogen1Y-20,lineCol4);
+		// Far Right Carbon - R Group Horizontal Bond
+		colorLine(carbon2X+20,carbon2Y-10,carbon5X-2,carbon5Y-10,lineCol5);
+		// Far Right Carbon - R group Vertical Bond
+		colorLine(carbon2X+8,carbon2Y+5,carbon6X+8,carbon6Y-20,lineCol6);
+		// Top Right Carbon - Oxygen Vertical Bond
+		colorLine(carbon2X+9,carbon2Y-22,oxygenX+9,oxygenY+2,lineCol9);
+		// TopMost Oxygen - Hydrogen 45 degree Bond
+		colorLine(oxygenX+23,oxygenY-10,hydrogen2X-8,hydrogen2Y-5,lineCol10);
+
+
+		//Draw Reaction Arrows
+		//top
+		colorLine(rxnX1start,rxnY1start,rxnX1end,rxnY1end,'black');
+		//bottom
+		colorLine(rxnX2start,rxnY2start,rxnX2end,rxnY2end,'black');
+		//top little arrow
+		colorLine(littleArrowXstart,littleArrowYstart,littleArrowXend,littleArrowYend,'black');
+		//bottom little arrow
+		colorLine(littleArrowX2start,littleArrowY2start,littleArrowX2end,littleArrowY2end,'black');
+		
+
+}//End function drawBonds()
+
+
+
+//Generic 'Create Atom' function
+
+function colorMol(font,atom,x,y,drawColor){
+
+		ctx.font = font;
+		ctx.fillStyle = drawColor;
+		ctx.fillText(atom,x,y);
+
+
+}//end function colorMol()
+
+function colorLine(startX,startY,endX,endY,drawColor){
+
+ctx.beginPath();
+ctx.moveTo(startX, startY);
+ctx.lineTo(endX, endY);
+ctx.strokeStyle = drawColor;
+ctx.stroke();
+
+}//end function colorLine()
+
+//Generic 'Create Quadratic Curve' function
+
+function colorCurve(line,style,startX,startY,controlX,controlY,endX,endY){
+
+		ctx.lineWidth = line;
+		ctx.strokeStyle = style;
+
+		ctx.beginPath();
+		ctx.moveTo(startX, startY);
+
+		ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+		ctx.stroke();
+
+}//end function colorCurve()
+
+//Canvas coloring to remove previous arrows
+function colorRect(topLeftX,topLeftY,boxWidth,boxHeight,fillColor){
+		 ctx.fillStyle=fillColor;
+		 ctx.fillRect(topLeftX,topLeftY,boxWidth,boxHeight);
+
+}//end function colorRect()
+
+
+function colorText(showWords,textX,textY,fillColor){
+	ctx.fillStyle=fillColor;
+	ctx.fillText(showWords,textX,textY);
+
+}//end function colorText()
+
+
+
+</script>
+
+</html>
